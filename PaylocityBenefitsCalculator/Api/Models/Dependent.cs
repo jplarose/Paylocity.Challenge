@@ -2,7 +2,10 @@
 
 public class Dependent
 {
-    public int Id { get; set; }
+    /// <summary>
+    /// Updated name, better to be more specific/Verbose
+    /// </summary>
+    public int DependentId { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public DateTime DateOfBirth { get; set; }
