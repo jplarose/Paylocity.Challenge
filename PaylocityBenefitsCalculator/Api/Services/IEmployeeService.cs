@@ -5,6 +5,6 @@ namespace Api.Services
     public interface IEmployeeService
     {
         Task<ICollection<Employee>> GetAllEmployees();
-        Task<Employee> GetEmployeeById(int employeeId);
+        Task<Employee?> GetEmployeeById(int employeeId);
     }
 }

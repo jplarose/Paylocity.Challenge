@@ -17,7 +17,7 @@ namespace Api.Services
             return await employeeRepository.GetAllEmployees();
         }
 
-        public async Task<Employee> GetEmployeeById(int employeeId)
+        public async Task<Employee?> GetEmployeeById(int employeeId)
         {
             return await employeeRepository.GetEmployeeById(employeeId);
         }

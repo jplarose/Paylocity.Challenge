@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
 builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
 
+builder.Services.AddSingleton<IDependentRepository, DependentRepository>();
+builder.Services.AddSingleton<IDependentService, DependentService>();
+
 builder.Services.AddSingleton<IPaycheckService, PaycheckService>();
 
 builder.Services.AddControllers();

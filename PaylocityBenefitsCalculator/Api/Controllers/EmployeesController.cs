@@ -19,10 +19,23 @@ public class EmployeesController : ControllerBase
     }
 
     [SwaggerOperation(Summary = "Get employee by id")]
+    [ProducesResponseType(typeof(ApiResponse<GetEmployeeDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<ProblemDetails>), StatusCodes.Status404NotFound)]
     [HttpGet("{id}")]
     public async Task<ActionResult<ApiResponse<GetEmployeeDto>>> Get(int id)
     {
-        Employee employee = await employeeService.GetEmployeeById(id);
+        var employee = await employeeService.GetEmployeeById(id);
+
+        if (employee == null)
+        {
+            var errorResult = new ApiResponse<ProblemDetails>
+            {
+                Success = false,
+                Message = "No employee with that Id"
+            };
+
+            return NotFound(errorResult);
+        }
 
         var result = new ApiResponse<GetEmployeeDto>
         {
@@ -30,10 +43,11 @@ public class EmployeesController : ControllerBase
             Success = true
         };
 
-        return result;
+        return Ok(result);
     }
 
     [SwaggerOperation(Summary = "Get all employees")]
+    [ProducesResponseType(typeof(ApiResponse<List<GetEmployeeDto>>), StatusCodes.Status200OK)]
     [HttpGet("")]
     public async Task<ActionResult<ApiResponse<List<GetEmployeeDto>>>> GetAll()
     {

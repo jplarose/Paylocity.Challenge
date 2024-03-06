@@ -8,16 +8,33 @@ namespace Api.DataAccess
     /// </summary>
     public class EmployeeRepository : IEmployeeRepository
     {
+        IDependentRepository dependentRepository;
+
+        public EmployeeRepository(IDependentRepository dependentRepository)
+        {
+            this.dependentRepository = dependentRepository;
+        }
+
         public async Task<ICollection<Employee>> GetAllEmployees()
         {
             List<Employee> employees = Employees;
 
+            employees.ForEach(async x => x.Dependents = await dependentRepository.GetDependents(x.EmployeeId));
+
             return employees;
         }
 
-        public async Task<Employee> GetEmployeeById(int employeeId)
+        public async Task<Employee?> GetEmployeeById(int employeeId)
         {
-            return Employees.FirstOrDefault(s => s.EmployeeId == employeeId);
+            var employee = Employees.FirstOrDefault(s => s.EmployeeId == employeeId);
+
+            if (employee != null)
+            {
+                employee.Dependents = await dependentRepository.GetDependents(employeeId);
+                return employee;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -40,33 +57,33 @@ namespace Api.DataAccess
                     LastName = "Morant",
                     Salary = 92365.22m,
                     DateOfBirth = new DateTime(1999, 8, 10),
-                    Dependents = new List<Dependent>
-                    {
-                        new()
-                        {
-                            DependentId = 1,
-                            FirstName = "Spouse",
-                            LastName = "Morant",
-                            Relationship = Relationship.Spouse,
-                            DateOfBirth = new DateTime(1998, 3, 3)
-                        },
-                        new()
-                        {
-                            DependentId = 2,
-                            FirstName = "Child1",
-                            LastName = "Morant",
-                            Relationship = Relationship.Child,
-                            DateOfBirth = new DateTime(2020, 6, 23)
-                        },
-                        new()
-                        {
-                            DependentId = 3,
-                            FirstName = "Child2",
-                            LastName = "Morant",
-                            Relationship = Relationship.Child,
-                            DateOfBirth = new DateTime(2021, 5, 18)
-                        }
-                    }
+                    //Dependents = new List<Dependent>
+                    //{
+                    //    new()
+                    //    {
+                    //        DependentId = 1,
+                    //        FirstName = "Spouse",
+                    //        LastName = "Morant",
+                    //        Relationship = Relationship.Spouse,
+                    //        DateOfBirth = new DateTime(1998, 3, 3)
+                    //    },
+                    //    new()
+                    //    {
+                    //        DependentId = 2,
+                    //        FirstName = "Child1",
+                    //        LastName = "Morant",
+                    //        Relationship = Relationship.Child,
+                    //        DateOfBirth = new DateTime(2020, 6, 23)
+                    //    },
+                    //    new()
+                    //    {
+                    //        DependentId = 3,
+                    //        FirstName = "Child2",
+                    //        LastName = "Morant",
+                    //        Relationship = Relationship.Child,
+                    //        DateOfBirth = new DateTime(2021, 5, 18)
+                    //    }
+                    //}
                 },
                 new()
                 {
@@ -75,17 +92,17 @@ namespace Api.DataAccess
                     LastName = "Jordan",
                     Salary = 143211.12m,
                     DateOfBirth = new DateTime(1963, 2, 17),
-                    Dependents = new List<Dependent>
-                    {
-                        new()
-                        {
-                            DependentId = 4,
-                            FirstName = "DP",
-                            LastName = "Jordan",
-                            Relationship = Relationship.DomesticPartner,
-                            DateOfBirth = new DateTime(1974, 1, 2)
-                        }
-                    }
+                    //Dependents = new List<Dependent>
+                    //{
+                    //    new()
+                    //    {
+                    //        DependentId = 4,
+                    //        FirstName = "DP",
+                    //        LastName = "Jordan",
+                    //        Relationship = Relationship.DomesticPartner,
+                    //        DateOfBirth = new DateTime(1974, 1, 2)
+                    //    }
+                    //}
                 }
             };
     }

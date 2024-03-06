@@ -19,7 +19,7 @@ public class DependentIntegrationTests : IntegrationTest
         {
             new()
             {
-                Id = 1,
+                DependentId = 1,
                 FirstName = "Spouse",
                 LastName = "Morant",
                 Relationship = Relationship.Spouse,
@@ -27,7 +27,7 @@ public class DependentIntegrationTests : IntegrationTest
             },
             new()
             {
-                Id = 2,
+                DependentId = 2,
                 FirstName = "Child1",
                 LastName = "Morant",
                 Relationship = Relationship.Child,
@@ -35,7 +35,7 @@ public class DependentIntegrationTests : IntegrationTest
             },
             new()
             {
-                Id = 3,
+                DependentId = 3,
                 FirstName = "Child2",
                 LastName = "Morant",
                 Relationship = Relationship.Child,
@@ -43,7 +43,7 @@ public class DependentIntegrationTests : IntegrationTest
             },
             new()
             {
-                Id = 4,
+                DependentId = 4,
                 FirstName = "DP",
                 LastName = "Jordan",
                 Relationship = Relationship.DomesticPartner,
@@ -60,7 +60,7 @@ public class DependentIntegrationTests : IntegrationTest
         var response = await HttpClient.GetAsync("/api/v1/dependents/1");
         var dependent = new GetDependentDto
         {
-            Id = 1,
+            DependentId = 1,
             FirstName = "Spouse",
             LastName = "Morant",
             Relationship = Relationship.Spouse,

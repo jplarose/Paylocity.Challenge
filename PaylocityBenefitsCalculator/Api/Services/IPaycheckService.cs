@@ -4,6 +4,6 @@ namespace Api.Services
 {
     public interface IPaycheckService
     {
-        Task<Paycheck> GetEmployeePaycheck(int employeeId);
+        Task<Paycheck?> GetEmployeePaycheck(int employeeId);
     }
 }
