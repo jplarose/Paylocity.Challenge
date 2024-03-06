@@ -2,6 +2,9 @@
 
 namespace Api.Services
 {
+    /// <summary>
+    /// Concrete implementation of a Paycheck service following the business rules defined in the requirements
+    /// </summary>
     public class PaycheckService : IPaycheckService
     {
         readonly IEmployeeService employeeService;
@@ -56,8 +59,10 @@ namespace Api.Services
             // Additional 2% charge for employees with a salary over $80000
             decimal salaryOver80kCost = (employee.Salary > 80000m ? (employee.Salary * 0.02m) : 0m) * 12;
 
-            // Additional $200/month if the employee is over 50
-            decimal ageOver50Cost = (GetAge(employee.DateOfBirth) > 50 ? 200m : 0m) * 12;
+            // Additional $200/month for each dependent over 50
+            int dependentsOver50Count = employee.Dependents.Count(s => GetAge(s.DateOfBirth) > 50);
+
+            decimal ageOver50Cost = (dependentsOver50Count > 0 ? 200m * dependentsOver50Count : 0m) * 12;
 
             // Employee's total yearly cost for benefits
             decimal totalYearlyCost = baseCost + dependentCost + salaryOver80kCost + ageOver50Cost;
