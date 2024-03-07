@@ -56,34 +56,7 @@ namespace Api.DataAccess
                     FirstName = "Ja",
                     LastName = "Morant",
                     Salary = 92365.22m,
-                    DateOfBirth = new DateTime(1999, 8, 10),
-                    //Dependents = new List<Dependent>
-                    //{
-                    //    new()
-                    //    {
-                    //        DependentId = 1,
-                    //        FirstName = "Spouse",
-                    //        LastName = "Morant",
-                    //        Relationship = Relationship.Spouse,
-                    //        DateOfBirth = new DateTime(1998, 3, 3)
-                    //    },
-                    //    new()
-                    //    {
-                    //        DependentId = 2,
-                    //        FirstName = "Child1",
-                    //        LastName = "Morant",
-                    //        Relationship = Relationship.Child,
-                    //        DateOfBirth = new DateTime(2020, 6, 23)
-                    //    },
-                    //    new()
-                    //    {
-                    //        DependentId = 3,
-                    //        FirstName = "Child2",
-                    //        LastName = "Morant",
-                    //        Relationship = Relationship.Child,
-                    //        DateOfBirth = new DateTime(2021, 5, 18)
-                    //    }
-                    //}
+                    DateOfBirth = new DateTime(1999, 8, 10)
                 },
                 new()
                 {
@@ -91,18 +64,7 @@ namespace Api.DataAccess
                     FirstName = "Michael",
                     LastName = "Jordan",
                     Salary = 143211.12m,
-                    DateOfBirth = new DateTime(1963, 2, 17),
-                    //Dependents = new List<Dependent>
-                    //{
-                    //    new()
-                    //    {
-                    //        DependentId = 4,
-                    //        FirstName = "DP",
-                    //        LastName = "Jordan",
-                    //        Relationship = Relationship.DomesticPartner,
-                    //        DateOfBirth = new DateTime(1974, 1, 2)
-                    //    }
-                    //}
+                    DateOfBirth = new DateTime(1963, 2, 17)
                 }
             };
     }

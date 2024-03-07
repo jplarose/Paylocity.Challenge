@@ -64,6 +64,13 @@ public class DependentsController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// I created this endpoint as a way to enforce the data integrity requirement of an employee only 
+    /// having one Spouse or Domestic Partner, not both and not more than one. By controlling how they
+    /// are created we can enforce that data requirement in the service layer.
+    /// </summary>
+    /// <param name="dependent"></param>
+    /// <returns></returns>
     [SwaggerOperation(Summary = "Add a new dependent for an employee")]
     [ProducesResponseType(typeof(ActionResult), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ActionResult<ProblemDetails>), StatusCodes.Status400BadRequest)]
