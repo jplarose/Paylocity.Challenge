@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Api.Dtos.Dependent;
 using Api.Dtos.Employee;
-using Api.Models;
 using Xunit;
+
 using static ApiTests.TestValues.TestValues;
 
 namespace ApiTests.IntegrationTests;

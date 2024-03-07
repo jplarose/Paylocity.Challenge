@@ -3,9 +3,6 @@ using Api.Dtos.Employee;
 using Api.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiTests.TestValues
 {
@@ -81,6 +78,150 @@ namespace ApiTests.TestValues
                     }
                 }
             }
+        };
+
+        /// <summary>
+        /// Employee with no dependents and a salary below $80k
+        /// </summary>
+        internal static Employee Employee1 => new Employee
+        {
+            EmployeeId = 1,
+            FirstName = "Guy",
+            LastName = "Mann",
+            Salary = 70000m,
+            DateOfBirth = new DateTime(1980, 5, 5)
+        };
+
+        /// <summary>
+        /// Employee with no dependents and a salary above $80k
+        /// </summary>
+        internal static Employee Employee2 => new Employee
+        {
+            EmployeeId = 2,
+            FirstName = "Guy",
+            LastName = "Mann",
+            Salary = 90000m,
+            DateOfBirth = new DateTime(1980, 5, 5)
+        };
+
+        /// <summary>
+        /// Employee with 2 dependents and a salary below $80k
+        /// </summary>
+        internal static Employee Employee3 => new Employee
+        {
+            EmployeeId = 3,
+            FirstName = "Guy",
+            LastName = "Mann",
+            Salary = 70000m,
+            DateOfBirth = new DateTime(1980, 5, 5),
+            Dependents = new List<Dependent>
+            {
+                new()
+                {
+                    DependentId = 1,
+                    DateOfBirth = new DateTime(1995, 7, 9)
+                },
+                new()
+                {
+                    DependentId = 2,
+                    DateOfBirth = new DateTime(1995, 7, 9)
+                }
+            }
+        };
+
+        /// <summary>
+        /// Employee with 2 dependents and a salary above $80k
+        /// </summary>
+        internal static Employee Employee4 => new Employee
+        {
+            EmployeeId = 4,
+            FirstName = "Guy",
+            LastName = "Mann",
+            Salary = 90000m,
+            DateOfBirth = new DateTime(1980, 5, 5),
+            Dependents = new List<Dependent>
+            {
+                new()
+                {
+                    DependentId = 1,
+                    DateOfBirth = new DateTime(1995, 7, 9)
+                },
+                new()
+                {
+                    DependentId = 2,
+                    DateOfBirth = new DateTime(1995, 7, 9)
+                }
+            }
+        };
+
+        /// <summary>
+        /// Employee with 2 dependents over 50 and a salary above $80k
+        /// </summary>
+        internal static Employee Employee5 => new Employee
+        {
+            EmployeeId = 5,
+            FirstName = "Guy",
+            LastName = "Mann",
+            Salary = 90000m,
+            DateOfBirth = new DateTime(1980, 5, 5),
+            Dependents = new List<Dependent>
+            {
+                new()
+                {
+                    DependentId = 1,
+                    DateOfBirth = new DateTime(1965, 7, 9)
+                },
+                new()
+                {
+                    DependentId = 2,
+                    DateOfBirth = new DateTime(1965, 7, 9)
+                }
+            }
+        };
+
+        internal static Paycheck? Employee1Paycheck => new Paycheck
+        {
+            EmployeeId = 1,
+            NumberOfDependents = 0,
+            GrossAmount = 2692.31m,
+            NetAmount = 2230.77m,
+            Deductions = 461.54m
+        };
+
+        internal static Paycheck? Employee2Paycheck => new Paycheck
+        {
+            EmployeeId = 2,
+            NumberOfDependents = 0,
+            GrossAmount = 3461.54m,
+            NetAmount = 2930.77m,
+            Deductions = 530.77m
+        };
+
+        internal static Paycheck? Employee3Paycheck => new Paycheck
+        {
+            EmployeeId = 3,
+            NumberOfDependents = 2,
+            GrossAmount = 2692.31m,
+            NetAmount = 1676.93m,
+            Deductions = 1015.38m
+        };
+
+        internal static Paycheck? Employee4Paycheck => new Paycheck
+        {
+            EmployeeId = 4,
+            NumberOfDependents = 2,
+            GrossAmount = 3461.54m,
+            NetAmount = 2376.92m,
+            Deductions = 1084.62m
+        };
+
+        internal static Paycheck? Employee5Paycheck => new Paycheck
+        {
+            EmployeeId = 5,
+            NumberOfDependents = 2,
+            GrossAmount = 3461.54m,
+            NetAmount = 2192.31m,
+            Deductions = 1269.23m
         };
     }
 }

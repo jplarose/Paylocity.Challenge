@@ -3,6 +3,7 @@ using Api.Models;
 using Api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Net.Mime;
 
 namespace Api.Controllers;
 
@@ -66,7 +67,7 @@ public class DependentsController : ControllerBase
     [SwaggerOperation(Summary = "Add a new dependent for an employee")]
     [ProducesResponseType(typeof(ActionResult), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ActionResult<ProblemDetails>), StatusCodes.Status400BadRequest)]
-    [HttpPost("{employeeId}")]
+    [HttpPost("")]
     public async Task<ActionResult> AddDependent([FromBody]AddDependentDto dependent)
     {
         bool success = await dependentService.AddDependent(new Dependent(dependent));

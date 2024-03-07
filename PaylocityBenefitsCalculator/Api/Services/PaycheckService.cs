@@ -57,7 +57,7 @@ namespace Api.Services
             decimal dependentCost = (employee.Dependents.Count() * 600m) * 12;
 
             // Additional 2% charge for employees with a salary over $80000
-            decimal salaryOver80kCost = (employee.Salary > 80000m ? (employee.Salary * 0.02m) : 0m) * 12;
+            decimal salaryOver80kCost = employee.Salary > 80000m ? (employee.Salary * 0.02m) : 0m;
 
             // Additional $200/month for each dependent over 50
             int dependentsOver50Count = employee.Dependents.Count(s => GetAge(s.DateOfBirth) > 50);

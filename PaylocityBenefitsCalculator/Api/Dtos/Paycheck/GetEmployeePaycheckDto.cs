@@ -5,6 +5,7 @@ namespace Api.Dtos.Paycheck
     {
         public int EmployeeId { get; set; }
         public decimal GrossAmount { get; set; }
+        public int NumberOfDependents { get; set; }
         public decimal Deductions { get; set; }
         public decimal NetAmount { get; set; }
 
@@ -16,6 +17,7 @@ namespace Api.Dtos.Paycheck
         {
             EmployeeId = paycheck.EmployeeId;
             GrossAmount = paycheck.GrossAmount;
+            NumberOfDependents = paycheck.NumberOfDependents;
             Deductions = paycheck.Deductions;
             NetAmount = paycheck.NetAmount;
         }
