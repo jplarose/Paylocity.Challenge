@@ -223,5 +223,18 @@ namespace ApiTests.TestValues
             NetAmount = 2192.31m,
             Deductions = 1269.23m
         };
+
+        /// <summary>
+        /// Populated dependent list that includes a spouse
+        /// </summary>
+        internal static List<Dependent> PopulatedDependent => new List<Dependent>
+        {
+            new Dependent
+            {
+                DependentId = 1,
+                EmployeeId = 1,
+                Relationship = Relationship.Spouse
+            }
+        };
     }
 }
