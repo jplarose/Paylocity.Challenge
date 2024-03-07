@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Api.Dtos.Dependent;
 using Api.Models;
 using Xunit;
+using System.Net.Http.Json;
 
 namespace ApiTests.IntegrationTests;
 
@@ -19,7 +21,7 @@ public class DependentIntegrationTests : IntegrationTest
         {
             new()
             {
-                Id = 1,
+                DependentId = 1,
                 FirstName = "Spouse",
                 LastName = "Morant",
                 Relationship = Relationship.Spouse,
@@ -27,7 +29,7 @@ public class DependentIntegrationTests : IntegrationTest
             },
             new()
             {
-                Id = 2,
+                DependentId = 2,
                 FirstName = "Child1",
                 LastName = "Morant",
                 Relationship = Relationship.Child,
@@ -35,7 +37,7 @@ public class DependentIntegrationTests : IntegrationTest
             },
             new()
             {
-                Id = 3,
+                DependentId = 3,
                 FirstName = "Child2",
                 LastName = "Morant",
                 Relationship = Relationship.Child,
@@ -43,7 +45,7 @@ public class DependentIntegrationTests : IntegrationTest
             },
             new()
             {
-                Id = 4,
+                DependentId = 4,
                 FirstName = "DP",
                 LastName = "Jordan",
                 Relationship = Relationship.DomesticPartner,
@@ -60,7 +62,7 @@ public class DependentIntegrationTests : IntegrationTest
         var response = await HttpClient.GetAsync("/api/v1/dependents/1");
         var dependent = new GetDependentDto
         {
-            Id = 1,
+            DependentId = 1,
             FirstName = "Spouse",
             LastName = "Morant",
             Relationship = Relationship.Spouse,
@@ -75,6 +77,46 @@ public class DependentIntegrationTests : IntegrationTest
     {
         var response = await HttpClient.GetAsync($"/api/v1/dependents/{int.MinValue}");
         await response.ShouldReturn(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task WhenAddingADependent_ShouldReturn201()
+    {
+        var dependent = new AddDependentDto
+        {
+            DependentId = 5,
+            FirstName = "Spouse",
+            LastName = "Morant",
+            Relationship = Relationship.Child,
+            DateOfBirth = new DateTime(1998, 3, 3),
+            EmployeeId = 2
+        };
+
+        JsonContent content = JsonContent.Create(dependent);
+
+        var response = await HttpClient.PostAsync($"/api/v1/dependents", content);
+
+        await response.ShouldReturn(HttpStatusCode.Created);
+    }
+
+    [Fact]
+    public async Task WhenAddingSecondSpouseOrDomesticPartner_ShouldReturn400()
+    {
+        var dependent = new AddDependentDto
+        {
+            DependentId = 1,
+            FirstName = "Spouse",
+            LastName = "Morant",
+            Relationship = Relationship.Spouse,
+            DateOfBirth = new DateTime(1998, 3, 3),
+            EmployeeId = 2
+        };
+
+        JsonContent content = JsonContent.Create(dependent);
+
+        var response = await HttpClient.PostAsync($"/api/v1/dependents", content);
+
+        await response.ShouldReturn(HttpStatusCode.BadRequest);
     }
 }
 
